@@ -23,3 +23,31 @@ class Solution {
         return idx;
     }
 };
+
+// optimized approach : using two pointer
+
+class Solution {
+public:
+    int celebrity(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int l = 0, r = n - 1;
+
+        // Step 1: Find candidate
+        while (l < r) {
+            if (mat[l][r] == 1)
+                l++;
+            else
+                r--;
+        } // at l == r this while will over
+
+        // Step 2: Verify candidate
+        for (int i = 0; i < n; i++) {
+            if (i != l) {
+                if (mat[l][i] == 1 || mat[i][l] == 0)
+                    return -1;
+            }
+        }
+
+        return l;
+    }
+};
